@@ -57,27 +57,27 @@ function addEdge(v,w) {
    this.edges++;
 }
 
-/*function showGraph() {
+function showGraph() {
    for (var i = 0; i < this.vertices; ++i) {
-      putstr(i + " -> ");
+      write(i + " -> ");
       for (var j = 0; j < this.vertices; ++j) {
          if (this.adj[i][j] != undefined)
-            putstr(this.adj[i][j] + ' ');
+            write(this.adj[i][j] + ' ');
       }
       print();
    }
-}*/
+}
 
 // a new function to display symbolic names instead of numbers
 function showGraph() {
    var visited = [];
    for (var i = 0; i < this.vertices; ++i) {
-      putstr(this.vertexList[i] + " -> ");
+      write(this.vertexList[i] + " -> ");
       visited.push(this.vertexList[i]);
       for (var j = 0; j < this.vertices; ++j) {
          if (this.adj[i][j] != undefined) {
             if (visited.indexOf(this.vertexList[j]) < 0) {
-               putstr(this.vertexList[j] + ' ');
+               write(this.vertexList[j] + ' ');
             }
          }
       }
@@ -101,13 +101,14 @@ function dfs(v) {
 function bfs(s) {
    var queue = [];
    this.marked[s] = true;
-   queue.unshift(s);
+   queue.push(s);
    while (queue.length > 0) {
       var v = queue.shift();
-      if (typeof(v) != "string") {
+      if (v !== undefined) {
          print("Visited vertex: " + v);
       }
-      for each (var w in this.adj[v]) {
+      for (var i = 0; i < this.adj[v].length; i++) {
+	 var w = this.adj[v][i];
          if (!this.marked[w]) {
             this.edgeTo[w] = v;
             this.marked[w] = true;
