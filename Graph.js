@@ -43,7 +43,8 @@ function topSort() {
 
 function topSortHelper(v, visited, stack) {
    visited[v] = true; 
-   for each (var w in this.adj[v]) {
+   for (var i = 0; i < this.adj[v]; i++) {
+      var w = this.adj[v][i];
       if (!visited[w]) {
          this.topSortHelper(visited[w], visited, stack);
       }
@@ -91,7 +92,8 @@ function dfs(v) {
    if (this.adj[v] != undefined) { 
       print("Visited vertex: " + v);
    }
-   for each (var w in this.adj[v]) {
+   for (var i = 0; i < this.adj[v].length; i++) {
+      var w = this.adj[v][i];
       if (!this.marked[w]) {
          this.dfs(w);
       }
