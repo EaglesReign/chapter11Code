@@ -20,7 +20,7 @@ function Graph(v) {
    this.pathTo = pathTo;
    this.topSortHelper = topSortHelper;
    this.topSort = topSort;
-   
+   this.showPath = showPath; 
 }
 
 function topSort() {
@@ -114,7 +114,7 @@ function bfs(s) {
          if (!this.marked[w]) {
             this.edgeTo[w] = v;
             this.marked[w] = true;
-            queue.unshift(w);
+            queue.push(w);
          }
       }
    }
@@ -124,8 +124,7 @@ function hasPathTo(v) {
    return this.marked[v];
 }
 
-function pathTo(v) {
-   var source = 0;
+function pathTo(source, v) {
    if (!this.hasPathTo(v)) {
       return undefined;
    }
@@ -133,6 +132,16 @@ function pathTo(v) {
    for (var i = v; i != source; i = this.edgeTo[i]) {
       path.push(i);
    }
-   path.push(s);
+   path.push(source);
    return path;
+}
+
+function showPath(paths) {
+  while (paths.length > 0) {
+    if (paths.length > 1) {
+      write(paths.pop() + '-');
+    } else {
+      write(paths.pop());
+    }
+  }
 }
